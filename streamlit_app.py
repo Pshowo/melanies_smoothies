@@ -28,6 +28,12 @@ if ingredients_list:
     # st.text(ingredients_list)
 
     ingredients_string = ' '.join(ingredients_list)
+    
+    for fruit_chosen in ingredients_list:
+        ingredients_string += fruit_chosen + ' '
+        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+        fv_df = st.dataframe(data=fruityvice_response.json(), use_container_width=True)
+
 
     # st.write(ingredients_string)
 
@@ -41,7 +47,3 @@ if ingredients_list:
         session.sql(my_instert_stmt).collect()
         st.success('Your Smoothies is ordered!')
 
-    for fruit_chosen in ingredients_list:
-        ingredients_string += fruit_chosen + ' '
-        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-        fv_df = st.dataframe(data=fruityvice_response.json(), use_container_width=True)
